@@ -1,0 +1,183 @@
+:root {
+  --border-width: 1px;
+  --button-padding: 10px;
+  --box-padding: 15px;
+  --font-size: 16px;
+  --green: #3fb618;
+  --green-hover: #2c8d3a;
+  --blue: #2780e3;
+  --blue-hover: #1967be;
+  --red: #ff2121;
+  --red-hover: #d82121;
+  --light-grey: #ddd;
+}
+
+body {
+  margin: 0;
+}
+body, input {
+  font-size: var(--font-size);
+  font-family: sans-serif;
+}
+progress {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  width: 100%;
+  height: 5px;
+  display: block;
+  background: var(--light-grey);
+  color: var(--green-hover);
+  box-shadow: 0;
+}
+progress::-moz-progress-bar { background: var(--green-hover); }
+progress::-webkit-progress-bar { background: var(--light-grey); }
+progress::-webkit-progress-value { background: var(--green-hover); }
+
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 9999;
+}
+
+#container {
+  margin: 0 auto;
+  padding: var(--box-padding);
+  max-width: 728px;
+}
+#container>*:not(:first-child) {
+  margin-top: var(--box-padding);
+}
+
+/* upload and filter box */
+#upload, #filter-box, #torrent-list, .download, .playlist {
+  display: flex;
+}
+input[type=text] {
+  padding: var(--button-padding);
+  border: grey solid var(--border-width);
+  flex: 1;
+  min-width: 150px;
+}
+#upload>input[type=file] {
+  display: none;
+}
+
+#deleted {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* torrent */
+#torrent-list {
+  flex-direction: column-reverse;
+}
+.torrent, .name, .file {
+  border: solid grey 0;
+}
+.torrent {
+  border-collapse: collapse;
+  border-width: 0 var(--border-width) var(--border-width) var(--border-width);
+}
+.torrent:nth-of-type(2n) {
+  background-color: #b1cdff;
+}
+.torrent:last-child, .file {
+  border-top-width: var(--border-width);
+}
+.stats-box, .file {
+  display: flex;
+  font-size: 12px;
+  --button-padding: 5px;
+}
+.name, .stats, .file>.size {
+  padding: var(--button-padding);
+}
+.torrent>.name {
+  overflow-wrap: break-word;
+  border-bottom-width: var(--border-width);
+}
+.torrent.multiple-files>.name {
+  cursor: pointer;
+}
+.torrent.multiple-files>.name::before {
+  font-family: FontAwesome;
+  content: '\f054';
+  width: 25px;
+  display: inline-block;
+  text-align: center;
+}
+.torrent.multiple-files.expand>.name::before {
+  content: '\f078';
+}
+.stats, .file>.name {
+  flex: 1;
+}
+.state {
+  font-weight: bold;
+  text-decoration: underline;
+}
+#template,
+#template_file,
+.file:not(.downloaded) .download,
+.torrent:not(.expand) .files,
+.torrent.downloaded progress,
+.torrent.downloaded .state,
+.torrent.downloaded .speed,
+.torrent:not(.mediafiles) .playlist,
+.torrent:not(.downloaded) .playlist,
+.torrent:not(.downloaded) .stats-box>.download,
+.torrent:not(.mine) .fa-times,
+#deleted>.fa-spinner:last-child,
+#deleted>.torrent,
+.hide {
+  display: none !important;
+}
+
+.download, .playlist {
+  text-decoration: none;
+  max-height: 25px;
+}
+
+/* font awesome */
+#container .fa {
+  padding: var(--button-padding);
+  border: transparent solid var(--border-width);
+  cursor: pointer;
+}
+#upload .fa, #torrent-list .fa {
+  color: white;
+}
+.fa-upload, .fa-download {
+  background-color: var(--green);
+  border-color: var(--green);
+}
+.fa-upload:hover, .fa-download:hover {
+  background-color: var(--green-hover);
+  border-color: var(--green-hover);
+}
+.fa-file, .fa-play {
+  background-color: var(--blue);
+  border-color: var(--blue);
+}
+.fa-file:hover, .fa-play:hover {
+  background-color: var(--blue-hover);
+  border-color: var(--blue-hover);
+}
+.fa-times {
+  background-color: var(--red);
+  border-color: var(--red);
+}
+.fa-times:hover {
+  background-color: var(--red-hover);
+  border-color: var(--red-hover);
+}
